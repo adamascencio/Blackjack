@@ -1,8 +1,24 @@
 /*----- constants -----*/
+const MAX_POINTS = 21;
+const BLACKJACK = 1.5;
+const WIN_PAYOUT = 1;
+
 /*----- app's state (variables) -----*/
+
+
+
 /*----- cached element references -----*/
+
+
+
 /*----- event listeners -----*/
+
+
+
 /*----- functions -----*/
+
+
+
 
 /*
 1. Create constants 

@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: lightgray;
+}
+
+header {
+  background-color: blue;
+  width: 100%;
+  margin: 0;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  margin: 0;
+  color: gold;
+  font-size: 3rem;
+}
+
+span {
+  padding-left: 25px;
+  font-size: 1.25rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  padding: .5rem 2rem;
+  font-size: 1.1rem;
+}
+
+#totals-row > p {
+  margin-top: 20px;
+}
+
+#bet-button-row > button {
+  margin-top: 20px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-margin {
+  margin-top: 50px;
+  width: 50%;
+  text-align: center;
+}
+
+.heading-margin {
+  margin-top: 35px;
+}
+
+#totals-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#dealer-hand, #player-hand {
+  border: 2px dashed rgb(93, 90, 90);
+  height: 40vh;
+  width: 40vh;
+  margin-top: 20px;
+}
+
+#hands {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#dealer, #player {
+  margin: 40px;
+}
+
+#game-play > p {
+  font-size: 1.5rem;
+  margin-top: 50px;
+}
+
+#p-score {
+  font-size: 1.5rem;
+}
