@@ -1,34 +1,104 @@
 /*----- constants -----*/
 const MAX_POINTS = 21;
-const BLACKJACK = 1.5;
+const BLACKJACK_PAYOUT = 1.5;
 const WIN_PAYOUT = 1;
+const SUITS = ['h', 'd', 's', 'c'];
+const VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+const ORIGINAL_DECK = createDeck();
 
 /*----- app's state (variables) -----*/
-
-
+let bankRoll; // player's starting cash amount
+let bet; // player's current bet
+let pScore, dScore; // score of player's (p) and dealer's (d) hand 
+let pHand, dHand; // hand of player (p) and dealer (d)
+let deck; // array of randomly shuffled 52-card deck;
+let winner; // player (p), dealer (d), or tie (t)
+let gameStatus; // true if game is active, false if game is inactive
 
 /*----- cached element references -----*/
-
-
+let bankRollEl = document.getElementById('b-roll');
+let betEl = document.getElementById('bet');
+let playBtns = document.getElementById('play-button-row');
+let betBtns = document.getElementById('bet-button-row');
+let scoreEl = document.getElementById('p-score');
+let dealBtn = document.getElementById('d-button');
+let hitBtn = document.getElementById('h-button');
+let standBtn = document.getElementById('s-button');
 
 /*----- event listeners -----*/
-
+document.getElementById('bet-button-row').addEventListener('click', handleBetClick);
+dealBtn.addEventListener('click', handleDealClick);
 
 
 /*----- functions -----*/
+init(); 
 
+// initialize the game, then call render
+function init() {
+  bankRoll = 500;
+  bet = 0;
+  pScore = dScore = 0;
+  pHand = []; 
+  dHand = [];
+  winner = null;
+  gameStatus = false;
+  render();
+}
+
+// Render the game state to the DOM
+function render() {
+  bankRollEl.textContent = bankRoll;
+  betEl.textContent = bet;
+  scoreEl.textContent = pScore;
+  renderButtons();
+}
+
+function renderButtons() {
+  dealBtn.style.display = bet > 0 ? 'inline' : 'none';
+  betBtns.style.visibility = gameStatus ? 'hidden': 'visible';
+}
+
+function handleBetClick(evt) {
+  const btn = evt.target;
+  // guards
+  if (btn.tagName !== 'BUTTON' ||  // make sure the button was clicked
+      gameStatus === true          // only allow clicks while game is inactive
+      ) return;
+  const betAmt = parseInt(btn.textContent.replace('$', ''));
+  bet += betAmt;
+  bankRoll -= betAmt;
+  render();
+}
+
+function handleDealClick() {
+  gameStatus = true;
+  const deck = shuffleDeck();
+}
+
+function shuffleDeck() {
+  const deck = ORIGINAL_DECK.slice(); // copy the original deck
+  const tempDeck = [];
+  while (deck.length > 0) {
+    const randIdx = Math.floor(Math.random() * deck.length);
+    const card = deck.pop(randIdx);
+    tempDeck.push(card);
+  }
+  return tempDeck;
+}
+
+function createDeck() {
+  const deck = [];
+  for (let suit of SUITS) {
+    for (let num of VALUES) {
+      deck.push(`${num}${suit}`);
+    }
+  }
+  return deck;
+}
 
 
 
 /*
-1. Create constants 
-  1a. MAX_POINTS = 21 
-  1b. scores for Jack, Queen, King, Ace
-  1c. MIN_BET = 5
-  1d. MAX_BET = 20
-  1e. BLACKJACK_PAYOUT_RATIO = 1.5 (user dealt a 10 & ace)
-  1f. REGULAR_WIN_RATIO = 1
-
 2. Create data structures to represent the following aspects of the game 
   2a. The 4-suit, 52 card deck
   2b. Players (house and player)
