@@ -3,7 +3,7 @@ const MAX_POINTS = 21;
 const BLACKJACK_PAYOUT = 1.5;
 const WIN_PAYOUT = 1;
 const SUITS = ['h', 'd', 's', 'c'];
-const VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+const VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k', 'a'];
 const ORIGINAL_DECK = createDeck();
 
 /*----- app's state (variables) -----*/
@@ -73,6 +73,17 @@ function handleBetClick(evt) {
 function handleDealClick() {
   gameStatus = true;
   const deck = shuffleDeck();
+  dHand = [];
+  pHand = [];
+  dHand.push(deck.pop(), deck.pop());
+  pHand.push(deck.pop(), deck.pop());
+  if (dHand[0] + dHand[1] === 21) {
+    return winner = 'd';
+  } else if (pHand[0] + pHand[1] === 21) {
+    return winner = 'p';
+  }
+  dScore = getScore(dHand);
+  pScore = getScore(pHand);
 }
 
 function shuffleDeck() {
@@ -80,8 +91,7 @@ function shuffleDeck() {
   const tempDeck = [];
   while (deck.length > 0) {
     const randIdx = Math.floor(Math.random() * deck.length);
-    const card = deck.pop(randIdx);
-    tempDeck.push(card);
+    tempDeck.push(deck.splice(randIdx, 1)[0]); // splice returns an array, use [0] to access the first element of the array
   }
   return tempDeck;
 }
@@ -94,6 +104,21 @@ function createDeck() {
     }
   }
   return deck;
+}
+
+function getScore(handArr) {
+  let score = 0;
+  handArr.sort();
+  handArr.forEach(function(card) {
+    if (Number.isInteger(parseInt(card[0]))) {
+      score += parseInt(card[0]);
+    } else if (card[0] === 'j' || card[0] === 'q' || card[0] === 'k') {
+      score += 10;
+    } else {
+      score += (MAX_POINTS - score > 11) ? 11 : 1;
+    }
+  });
+  return score;
 }
 
 
