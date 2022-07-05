@@ -1,7 +1,5 @@
 /*----- constants -----*/
 const MAX_POINTS = 21;
-const BLACKJACK_PAYOUT = 1.5;
-const WIN_PAYOUT = 1;
 const SUITS = ['h', 'd', 's', 'c'];
 const VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k', 'a'];
 const ORIGINAL_DECK = createDeck();
@@ -12,7 +10,7 @@ let bet; // player's current bet
 let pScore, dScore; // score of player's (p) and dealer's (d) hand 
 let pHand, dHand; // hand of player (p) and dealer (d)
 let deck; // array of randomly shuffled 52-card deck;
-let winner; // player (p), dealer (d), or tie (t)
+let winner; // player (p), player blackjack (pbj), dealer (d), or tie (t)
 let gameStatus; // true if game is active, false if game is inactive
 
 /*----- cached element references -----*/
@@ -77,13 +75,20 @@ function handleDealClick() {
   pHand = [];
   dHand.push(deck.pop(), deck.pop());
   pHand.push(deck.pop(), deck.pop());
-  if (dHand[0] + dHand[1] === 21) {
-    return winner = 'd';
-  } else if (pHand[0] + pHand[1] === 21) {
-    return winner = 'p';
-  }
   dScore = getScore(dHand);
   pScore = getScore(pHand);
+  if (dScore === 21 && pScore === 21) {
+    winner = 't';
+    !gameStatus;
+  } else if (pScore === 21) {
+    winner = 'pbj';
+    !gameStatus;
+  } else if (dScore === 21) {
+    winner = 'd';
+    !gameStatus;
+  }
+  if (winner === 'pbj' || winner === 't') payWinner(winner); 
+  render();
 }
 
 function shuffleDeck() {
@@ -120,6 +125,17 @@ function getScore(handArr) {
   });
   aces = (MAX_POINTS - score >= 11) ? aces *= 11 : aces *= 1;
   return score + aces;
+}
+
+function payWinner(string) {
+  if (string === 'pbj') {
+    bankRoll += bet + (bet * 1.5);
+  } else if (string === 't') {
+    bankRoll += bet;
+  } else if (string === 'p') {
+    bankRoll += bet * 2;
+  } 
+  bet = 0;
 }
 
 
