@@ -53,7 +53,7 @@ function render() {
 }
 
 function renderButtons() {
-  dealBtn.style.display = bet > 0 ? 'inline' : 'none';
+  dealBtn.style.display = (!gameStatus && bet > 0) ? 'inline' : 'none';
   hitBtn.style.display = standBtn.style.display = gameStatus ? 'inline' : 'none';
   betBtns.style.visibility = gameStatus ? 'hidden': 'visible';
 }
@@ -94,7 +94,14 @@ function handleDealClick() {
 }
 
 function handleHitClick() {
-
+  pHand.push(deck.pop());
+  pScore = getScore(pHand);
+  if (pScore > 21) {
+    winner = 'd';
+    payWinner(winner);
+    !gameStatus;
+  }
+  render();
 }
 
 function shuffleDeck() {
@@ -141,7 +148,7 @@ function payWinner(string) {
   } else if (string === 'p') {
     bankRoll += bet * 2;
   } 
-  bet = 0;
+  bet, pScore = 0;
 }
 
 
