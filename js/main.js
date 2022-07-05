@@ -26,6 +26,7 @@ let standBtn = document.getElementById('s-button');
 /*----- event listeners -----*/
 document.getElementById('bet-button-row').addEventListener('click', handleBetClick);
 dealBtn.addEventListener('click', handleDealClick);
+hitBtn.addEventListener('click', handleHitClick);
 
 
 /*----- functions -----*/
@@ -53,6 +54,7 @@ function render() {
 
 function renderButtons() {
   dealBtn.style.display = bet > 0 ? 'inline' : 'none';
+  hitBtn.style.display = standBtn.style.display = gameStatus ? 'inline' : 'none';
   betBtns.style.visibility = gameStatus ? 'hidden': 'visible';
 }
 
@@ -70,9 +72,7 @@ function handleBetClick(evt) {
 
 function handleDealClick() {
   gameStatus = true;
-  const deck = shuffleDeck();
-  dHand = [];
-  pHand = [];
+  deck = shuffleDeck();
   dHand.push(deck.pop(), deck.pop());
   pHand.push(deck.pop(), deck.pop());
   dScore = getScore(dHand);
@@ -89,6 +89,10 @@ function handleDealClick() {
   }
   if (winner === 'pbj' || winner === 't') payWinner(winner); 
   render();
+}
+
+function handleHitClick() {
+
 }
 
 function shuffleDeck() {
