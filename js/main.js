@@ -73,6 +73,8 @@ function handleBetClick(evt) {
 function handleDealClick() {
   gameStatus = true;
   deck = shuffleDeck();
+  dHand = [];
+  pHand = [];
   dHand.push(deck.pop(), deck.pop());
   pHand.push(deck.pop(), deck.pop());
   dScore = getScore(dHand);
