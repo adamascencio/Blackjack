@@ -108,17 +108,18 @@ function createDeck() {
 
 function getScore(handArr) {
   let score = 0;
-  handArr.sort();
+  let aces = 0;
   handArr.forEach(function(card) {
     if (Number.isInteger(parseInt(card[0]))) {
       score += parseInt(card[0]);
     } else if (card[0] === 'j' || card[0] === 'q' || card[0] === 'k') {
       score += 10;
     } else {
-      score += (MAX_POINTS - score > 11) ? 11 : 1;
+      aces++;
     }
   });
-  return score;
+  aces = (MAX_POINTS - score >= 11) ? aces *= 11 : aces *= 1;
+  return score + aces;
 }
 
 
