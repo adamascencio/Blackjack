@@ -81,13 +81,10 @@ function handleDealClick() {
   pScore = getScore(pHand);
   if (dScore === 21 && pScore === 21) {
     winner = 't';
-    !gameStatus;
   } else if (pScore === 21) {
     winner = 'pbj';
-    !gameStatus;
   } else if (dScore === 21) {
     winner = 'd';
-    !gameStatus;
   }
   if (winner === 'pbj' || winner === 't') payWinner(winner); 
   render();
@@ -99,7 +96,6 @@ function handleHitClick() {
   if (pScore > 21) {
     winner = 'd';
     payWinner(winner);
-    !gameStatus;
   }
   render();
 }
@@ -148,7 +144,8 @@ function payWinner(string) {
   } else if (string === 'p') {
     bankRoll += bet * 2;
   } 
-  bet, pScore = 0;
+  bet = pScore = 0;
+  gameStatus = false;
 }
 
 
