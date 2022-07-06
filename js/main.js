@@ -1,5 +1,4 @@
 /*----- constants -----*/
-const MAX_POINTS = 21;
 const SUITS = ['h', 'd', 's', 'c'];
 const VALUES = ['02', '03', '0', '05', '06', '07', '08', '09', '10', 'j', 'q', 'k', 'a'];
 const ORIGINAL_DECK = createDeck();
@@ -84,6 +83,7 @@ function handleBetClick(evt) {
 }
 
 function handleDealClick() {
+  winner = null;
   gameStatus = true;
   deck = shuffleDeck();
   dHand = [];
@@ -92,28 +92,19 @@ function handleDealClick() {
   pHand.push(deck.pop(), deck.pop());
   dScore = getScore(dHand);
   pScore = getScore(pHand);
-  if (dScore === 21 && pScore === 21) {
-    winner = 't';
-  } else if (pScore === 21) {
-    winner = 'pbj';
-  } else if (dScore === 21) {
-    winner = 'dbj';
-  }
-  if (winner === 'pbj' || winner === 't') payWinner(winner); 
-  winner = null;
+  if (pScore === 21 || dScore === 21){
+    getWinner();
+    payWinner();
+  };
   render();
 }
 
 function handleHitClick() {
   pHand.push(deck.pop());
   pScore = getScore(pHand);
-  if (pScore > 21) {
-    winner = 'd';
-  } else if (pScore === 21) {
-    winner = 'p'
-  }
-  if (winner !== null) {
-    payWinner(winner);
+  if (pScore >= 21) {
+    getWinner();
+    payWinner();
   }
   render();
 }
@@ -122,28 +113,46 @@ function handleDealerHit() {
   if (dScore <= 16) {
     dHand.push(deck.pop());
     dScore = getScore(dHand);
-    if (dScore === 21) {
-      winner = 'd';
-      payWinner(winner);
-    } else if (dScore > 21) {
-      winner = 'p'
-      payWinner(winner);
-    }
   }
   render();
 }
 
 function handleStandClick() {
   handleDealerHit();
-  if (pScore > dScore) {
-    winner = 'p';
-  } else if (pScore < dScore) {
-    winner = 'd';
-  } else {
-    winner = 't';
-  }
-  payWinner(winner);
+  getWinner();
+  payWinner();
   render();
+}
+
+function getWinner() {
+  // check for blackjack
+  if (pHand.length === 2 || dHand.length === 2) {
+    if (dScore === 21 && pScore === 21) {
+      winner = 't';
+    } else if (pScore === 21) {
+      winner = 'pbj';
+    } else if (dScore === 21) {
+      winner = 'dbj';
+    }
+  }
+  // get winner on hit or stand
+  if (pHand.length > 2 || dHand.length > 2) { 
+    if (dScore > 21) {
+      winner = 'p';
+    } else if (pScore > 21) {
+      winner = 'd';
+    } else if (dScore === pScore) {
+      winner = 't';
+    } else if (pScore === 21) {
+      winner = 'p';
+    } else if (dScore === 21) {
+      winner = 'd';
+    } else if (dScore > pScore) {
+      winner = 'd';
+    } else if (pScore > dScore) {
+      winner = 'p';
+    }
+  }
 }
 
 function shuffleDeck() {
@@ -177,56 +186,18 @@ function getScore(handArr) {
     score += card.value;
     if (card.value === 0) aces++;
   });
-  aces = (MAX_POINTS - score >= 11) ? aces *= 11 : aces *= 1;
+  aces = (21 - score >= 11) ? aces *= 11 : aces *= 1;
   return score + aces;
 }
 
-function payWinner(string) {
-  if (string === 'pbj') {
+function payWinner() {
+  if (winner === 'pbj') {
     bankRoll += bet + (bet * 1.5);
-  } else if (string === 't') {
+  } else if (winner === 't') {
     bankRoll += bet;
-  } else if (string === 'p') {
+  } else if (winner === 'p') {
     bankRoll += bet * 2;
   } 
   bet = pScore = 0;
   gameStatus = false;
 }
-
-
-
-/*
-2. Create data structures to represent the following aspects of the game 
-  2a. The 4-suit, 52 card deck
-  2b. Players (house and player)
-    2.b.1. Data structures should hold player ID, score (max 21), hand, wager (player only)
-
-3. Game Logic
-initialize a winnings variable to store wagers by user
-create a randomly shuffled deck array upon click of play button
-pop from the deck to create hands of 2 cards each for both the player and house
-ask user how much they'd like to wager (5-20)
-display one of the house's cards to the user
-  sum points for cards dealt to house
-display user's hand 
-  sum points for cards dealt to player
-  if user scored 21 on the draw
-    user wins, pay 1.5 times wager 
-ask user whether they want to hit or stay
-  if hit
-    pop a card from our deck
-    add to current score
-    if score > 21
-      winnings -= wager
-    if card is ace and MAX_POINTS - score < 11
-      ace = 1
-    else 
-      ace = 11
-  if stay
-    greater score between player & house wins
-    if player wins
-      winnings += wager
-    if house wins
-      winnings -= wager
-ask user to select play button if they'd like to continue playing      
-*/
