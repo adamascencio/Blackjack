@@ -135,7 +135,7 @@ function handleStandClick() {
 
 function getWinner() {
   // check for blackjack
-  if (pHand.length === 2 || dHand.length === 2) {
+  if (pHand.length === 2) {
     if (dScore === 21 && pScore === 21) {
       return winner = 't';
     } else if (pScore === 21) {
@@ -154,7 +154,7 @@ function getWinner() {
   } else if (pScore === 21) {
     return winner = 'p';
   } else if (dScore === 21) {
-    return winner = 'd';
+    return pHand.length === 2 ? winner = 'dbj' : winner = 'd';
   } else if (dScore > pScore) {
     return winner = 'd';
   } else if (pScore > dScore) {

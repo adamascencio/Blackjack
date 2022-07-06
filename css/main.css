@@ -27,6 +27,7 @@ h1 {
 
 h2 {
   margin-top: 25px;
+  text-align: center;
 }
 
 span {
@@ -90,10 +91,11 @@ button {
 
 #dealer-hand, #player-hand {
   border: 2px solid rgb(8, 8, 8);
-  border-radius: 20%;
+  border-radius: 10%;
   background-color: #35654d;
   height: 35vh;
   width: 30vw;
+  max-width: 500px;
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -120,8 +122,24 @@ button {
   font-size: 1.5rem;
 }
 
+/* Media Queries */
+@media screen and (max-width: 1580px) {
+  #dealer-hand,
+  #player-hand {
+    height: 42vh;
+    font-size: 20px;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   #dealer-hand, #player-hand {
     height: 38vh;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #dealer-hand,
+  #player-hand {
+    height: 2vh;
   }
 }
