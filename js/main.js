@@ -136,6 +136,7 @@ function getWinner() {
     }
   }
   // get winner on hit or stand
+  // extra comment
   if (pHand.length > 2 || dHand.length > 2) { 
     if (dScore > 21) {
       winner = 'p';
