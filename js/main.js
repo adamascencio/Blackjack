@@ -1,7 +1,7 @@
 /*----- constants -----*/
 const MAX_POINTS = 21;
 const SUITS = ['h', 'd', 's', 'c'];
-const VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k', 'a'];
+const VALUES = ['02', '03', '0', '05', '06', '07', '08', '09', '10', 'j', 'q', 'k', 'a'];
 const ORIGINAL_DECK = createDeck();
 const DISPLAY_WINNER = {
   null: 'Ready to test your luck?',
@@ -18,7 +18,7 @@ let bet; // player's current bet
 let pScore, dScore; // score of player's (p) and dealer's (d) hand 
 let pHand, dHand; // hand of player (p) and dealer (d)
 let deck; // array of randomly shuffled 52-card deck;
-let winner; // player (p), player blackjack (pbj), dealer (d), or tie (t)
+let winner; // player (p), player blackjack (pbj), dealer (d), dealer blackjack (dbj), or tie (t)
 let gameStatus; // true if game is active, false if game is inactive
 
 /*----- cached element references -----*/
@@ -115,7 +115,15 @@ function handleHitClick() {
   if (winner !== null) {
     payWinner(winner);
   }
+  handleDealerHit()
   render();
+}
+
+function handleDealerHit() {
+  if (dScore <= 16) {
+    dHand.push(deck.pop());
+    dScore = getScore(pHand);
+  }
 }
 
 function handleStandClick() {
@@ -144,7 +152,11 @@ function createDeck() {
   const deck = [];
   for (let suit of SUITS) {
     for (let num of VALUES) {
-      deck.push(`${num}${suit}`);
+      deck.push({
+        face: `${suit}${num}`,
+        value: Number(num) || (num === 'a' ? 0 : 10),
+        back: false
+      });
     }
   }
   return deck;
@@ -154,13 +166,8 @@ function getScore(handArr) {
   let score = 0;
   let aces = 0;
   handArr.forEach(function(card) {
-    if (Number.isInteger(parseInt(card[0]))) {
-      score += parseInt(card[0]);
-    } else if (card[0] === 'j' || card[0] === 'q' || card[0] === 'k') {
-      score += 10;
-    } else {
-      aces++;
-    }
+    score += card.value;
+    if (card.value === 0) aces++;
   });
   aces = (MAX_POINTS - score >= 11) ? aces *= 11 : aces *= 1;
   return score + aces;
