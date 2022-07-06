@@ -27,7 +27,7 @@ let standBtn = document.getElementById('s-button');
 document.getElementById('bet-button-row').addEventListener('click', handleBetClick);
 dealBtn.addEventListener('click', handleDealClick);
 hitBtn.addEventListener('click', handleHitClick);
-
+standBtn.addEventListener('click', handleStandClick);
 
 /*----- functions -----*/
 init(); 
@@ -97,6 +97,18 @@ function handleHitClick() {
     winner = 'd';
     payWinner(winner);
   }
+  render();
+}
+
+function handleStandClick() {
+  if (pScore > dScore) {
+    winner = 'p';
+  } else if (pScore < dScore) {
+    winner = 'd';
+  } else {
+    winner = 't';
+  }
+  payWinner(winner);
   render();
 }
 
