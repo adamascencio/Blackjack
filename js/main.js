@@ -115,7 +115,6 @@ function handleHitClick() {
   if (winner !== null) {
     payWinner(winner);
   }
-  handleDealerHit()
   render();
 }
 
@@ -135,6 +134,7 @@ function handleDealerHit() {
 }
 
 function handleStandClick() {
+  handleDealerHit();
   if (pScore > dScore) {
     winner = 'p';
   } else if (pScore < dScore) {
