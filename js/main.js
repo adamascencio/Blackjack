@@ -1,6 +1,6 @@
 /*----- constants -----*/
 const SUITS = ['h', 'd', 's', 'c'];
-const VALUES = ['02', '03', '0', '05', '06', '07', '08', '09', '10', 'j', 'q', 'k', 'a'];
+const VALUES = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const ORIGINAL_DECK = createDeck();
 const DISPLAY_WINNER = {
   null: 'Ready to test your luck?',
@@ -29,6 +29,8 @@ let scoreEl = document.getElementById('p-score');
 let dealBtn = document.getElementById('d-button');
 let hitBtn = document.getElementById('h-button');
 let standBtn = document.getElementById('s-button');
+let playerEl = document.getElementById('player-hand');
+let dealerEl = document.getElementById('dealer-hand');
 
 /*----- event listeners -----*/
 document.getElementById('bet-button-row').addEventListener('click', handleBetClick);
@@ -56,8 +58,14 @@ function render() {
   bankRollEl.textContent = bankRoll;
   betEl.textContent = bet;
   scoreEl.textContent = pScore;
+  renderHands();
   renderButtons();
   renderWinner();
+}
+
+function renderHands() {
+  playerEl.innerHTML = pHand.map(cardObj => `<div class="card ${cardObj.face} large"></div>`).join('');
+  dealerEl.innerHTML = dHand.map(cardObj => `<div class="card ${cardObj.back && gameStatus ? 'back' : cardObj.face} large"></div>`).join('');
 }
 
 function renderButtons() {
@@ -90,6 +98,7 @@ function handleDealClick() {
   pHand = [];
   dHand.push(deck.pop(), deck.pop());
   pHand.push(deck.pop(), deck.pop());
+  dHand[1].back = true;
   dScore = getScore(dHand);
   pScore = getScore(pHand);
   if (pScore === 21 || dScore === 21){
