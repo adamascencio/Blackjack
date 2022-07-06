@@ -128,31 +128,28 @@ function getWinner() {
   // check for blackjack
   if (pHand.length === 2 || dHand.length === 2) {
     if (dScore === 21 && pScore === 21) {
-      winner = 't';
+      return winner = 't';
     } else if (pScore === 21) {
-      winner = 'pbj';
+      return winner = 'pbj';
     } else if (dScore === 21) {
-      winner = 'dbj';
+      return winner = 'dbj';
     }
   }
   // get winner on hit or stand
-  // extra comment
-  if (pHand.length > 2 || dHand.length > 2) { 
-    if (dScore > 21) {
-      winner = 'p';
-    } else if (pScore > 21) {
-      winner = 'd';
-    } else if (dScore === pScore) {
-      winner = 't';
-    } else if (pScore === 21) {
-      winner = 'p';
-    } else if (dScore === 21) {
-      winner = 'd';
-    } else if (dScore > pScore) {
-      winner = 'd';
-    } else if (pScore > dScore) {
-      winner = 'p';
-    }
+  if (dScore > 21) {
+    return winner = 'p';
+  } else if (pScore > 21) {
+    return winner = 'd';
+  } else if (dScore === pScore) {
+    return winner = 't';
+  } else if (pScore === 21) {
+    return winner = 'p';
+  } else if (dScore === 21) {
+    return winner = 'd';
+  } else if (dScore > pScore) {
+    return winner = 'd';
+  } else if (pScore > dScore) {
+    return winner = 'p';
   }
 }
 
@@ -199,6 +196,6 @@ function payWinner() {
   } else if (winner === 'p') {
     bankRoll += bet * 2;
   } 
-  bet = pScore = 0;
+  bet = pScore = dScore = 0;
   gameStatus = false;
 }
