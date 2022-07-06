@@ -7,7 +7,7 @@ const DISPLAY_WINNER = {
   null: 'Ready to test your luck?',
   p: 'Player wins!',
   d: 'Dealer wins!', 
-  t: "It's a tie! Player keeps his bet", 
+  t: "It's a tie! Player keeps his bet.", 
   pbj: 'Player hit Blackjack! Player wins!',
   dbj: 'Dealer hit Blackjack! Dealer wins!'
 }
@@ -122,8 +122,16 @@ function handleHitClick() {
 function handleDealerHit() {
   if (dScore <= 16) {
     dHand.push(deck.pop());
-    dScore = getScore(pHand);
+    dScore = getScore(dHand);
+    if (dScore === 21) {
+      winner = 'd';
+      payWinner(winner);
+    } else if (dScore > 21) {
+      winner = 'p'
+      payWinner(winner);
+    }
   }
+  render();
 }
 
 function handleStandClick() {
