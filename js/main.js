@@ -100,6 +100,7 @@ function handleDealClick() {
     winner = 'dbj';
   }
   if (winner === 'pbj' || winner === 't') payWinner(winner); 
+  winner = null;
   render();
 }
 
@@ -108,6 +109,10 @@ function handleHitClick() {
   pScore = getScore(pHand);
   if (pScore > 21) {
     winner = 'd';
+  } else if (pScore === 21) {
+    winner = 'p'
+  }
+  if (winner !== null) {
     payWinner(winner);
   }
   render();
@@ -130,7 +135,7 @@ function shuffleDeck() {
   const tempDeck = [];
   while (deck.length > 0) {
     const randIdx = Math.floor(Math.random() * deck.length);
-    tempDeck.push(deck.splice(randIdx, 1)[0]); // splice returns an array, use [0] to access the first element of the array
+    tempDeck.push(deck.splice(randIdx, 1)[0]); 
   }
   return tempDeck;
 }
