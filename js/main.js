@@ -179,13 +179,15 @@ function createDeck() {
 
 function getScore(handArr) {
   let score = 0;
-  let aces = 0;
+  let aceCount = 0;
   handArr.forEach(function(card) {
     score += card.value;
-    if (card.value === 0) aces++;
+    if (card.value === 0) aceCount++;
   });
-  aces = (21 - score >= 11) ? aces *= 11 : aces *= 1;
-  return score + aces;
+  for (let i = 0; i < aceCount; i++) {
+    (21 - score >= 11) ? score += 11 : score += 1;
+  }
+  return score;
 }
 
 function payWinner() {
