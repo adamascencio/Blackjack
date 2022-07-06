@@ -25,6 +25,10 @@ h1 {
   font-size: 3rem;
 }
 
+h2 {
+  margin-top: 25px;
+}
+
 span {
   padding-left: 25px;
   font-size: 1.25rem;

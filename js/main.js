@@ -3,6 +3,14 @@ const MAX_POINTS = 21;
 const SUITS = ['h', 'd', 's', 'c'];
 const VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k', 'a'];
 const ORIGINAL_DECK = createDeck();
+const DISPLAY_WINNER = {
+  null: 'Ready to test your luck?',
+  p: 'Player wins!',
+  d: 'Dealer wins!', 
+  t: "It's a tie! Player keeps his bet", 
+  pbj: 'Player hit Blackjack! Player wins!',
+  dbj: 'Dealer hit Blackjack! Dealer wins!'
+}
 
 /*----- app's state (variables) -----*/
 let bankRoll; // player's starting cash amount
@@ -50,12 +58,17 @@ function render() {
   betEl.textContent = bet;
   scoreEl.textContent = pScore;
   renderButtons();
+  renderWinner();
 }
 
 function renderButtons() {
   dealBtn.style.display = (!gameStatus && bet > 0) ? 'inline' : 'none';
   hitBtn.style.display = standBtn.style.display = gameStatus ? 'inline' : 'none';
   betBtns.style.visibility = gameStatus ? 'hidden': 'visible';
+}
+
+function renderWinner() {
+  document.querySelector('h2').textContent = DISPLAY_WINNER[winner];
 }
 
 function handleBetClick(evt) {
@@ -84,7 +97,7 @@ function handleDealClick() {
   } else if (pScore === 21) {
     winner = 'pbj';
   } else if (dScore === 21) {
-    winner = 'd';
+    winner = 'dbj';
   }
   if (winner === 'pbj' || winner === 't') payWinner(winner); 
   render();
