@@ -6,13 +6,13 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: lightgray;
-  background-image: url("https: //i.imgur.com/FYxXBu1.jpg");
+  background-image: url("https://i.imgur.com/XfDiBCZ.jpg");
+  background-size: cover;
   font-family: 'Abril Fatface', cursive;
 }
 
 header {
-  background-color: blue;
+  background-color: #35654d;
   width: 100%;
   margin: 0;
   height: 10vh;
@@ -21,9 +21,18 @@ header {
   justify-content: center;
 }
 
+h1, h2, #dealer > p, #player > p {
+  color: gold;
+  font-size: 1.8rem;
+}
+
+#dealer > h2, #player > h2 {
+  color: rgb(242, 11, 11);
+  font-size: 2rem;
+}
+
 h1 {
   margin: 0;
-  color: gold;
   font-size: 3rem;
   font-family: 'Lobster', cursive;
 }
@@ -59,6 +68,12 @@ button {
   margin-top: 20px;
 }
 
+.bet-totals > p {
+  margin: auto;
+  padding: 3px;
+  font-size: 1.5rem;
+}
+
 #bet-button-row > button {
   margin: 0 auto;
   text-align: center;
@@ -68,6 +83,10 @@ button {
   text-align: center;
   margin-top: 10px;
   font-size: 1.5em;
+}
+
+.btn {
+  width: 50px;
 }
 
 .container-margin {
@@ -81,14 +100,15 @@ button {
 } 
 
 .bet-totals, #bet-button-row {
-  border: 1px solid darkslategray;
-  padding: 10px;
-  background-color: white;
+  border: 3px solid white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: lightgray;
   text-align: center;
 }
 
 .bet-totals {
-  padding: 24px 51.906px;
+  padding: 14px 51.906px;
 }
 
 #play-button-row {
@@ -105,7 +125,7 @@ button {
 }
 
 #bet-button-row {
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 #bet-button-row > button {
