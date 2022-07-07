@@ -7,6 +7,7 @@ body {
   height: 100vh;
   margin: 0;
   background-color: lightgray;
+  font-family: 'Abril Fatface', cursive;
 }
 
 header {
@@ -23,6 +24,7 @@ h1 {
   margin: 0;
   color: gold;
   font-size: 3rem;
+  font-family: 'Lobster', cursive;
 }
 
 h2 {
@@ -33,6 +35,11 @@ h2 {
 span {
   padding-left: 25px;
   font-size: 1.25rem;
+}
+
+p {
+  text-align: left;
+  font-size: 1.25em;
 }
 
 main {
@@ -55,9 +62,10 @@ button {
   margin-top: 20px;
 }
 
-.flex {
-  display: flex;
-  flex-direction: column;
+.align-labels {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.5em;
 }
 
 .container-margin {
@@ -68,16 +76,29 @@ button {
 
 .heading-margin {
   margin-top: 35px;
+} 
+
+.bet-totals, #bet-button-row {
+  border: 1px solid darkslategray;
+  padding: 10px;
+  background-color: white;
+  text-align: center;
+}
+
+.bet-totals {
+  padding: 23.5px;
 }
 
 #totals-row {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-end;
   justify-content: center;
+  gap: 100px;
 }
 
 #bet-button-row {
-  margin-left: 50px;
+  margin-top: 20px;
 }
 
 #bet-button-row > button {
@@ -93,8 +114,8 @@ button {
   border: 2px solid rgb(8, 8, 8);
   border-radius: 10%;
   background-color: #35654d;
-  height: 37vh;
-  width: 22vw;
+  height: 32vh;
+  width: 25vw;
   max-width: 500px;
   margin-top: 20px;
   display: flex;
@@ -118,28 +139,30 @@ button {
   margin-top: 25px;
 }
 
-#p-score {
+#d-score, #p-score {
   font-size: 1.5rem;
 }
 
 /* Media Queries */
-@media screen and (max-width: 1580px) {
-  #dealer-hand,
-  #player-hand {
-    height: 42vh;
-    font-size: 20px;
-  }
-}
 
 @media screen and (max-width: 1200px) {
   #dealer-hand, #player-hand {
-    height: 38vh;
+    height: 35vh;
+    width: 30vw;
   }
 }
 
+@media screen and (max-width: 1000px) {
+  #dealer-hand, #player-hand {
+    height: 32vh;
+    width: 33vw;
+  }
+} 
+  
 @media screen and (max-width: 700px) {
   #dealer-hand,
   #player-hand {
-    height: 2vh;
+    height: 30vh;
+    width: 35vw;
   }
 }

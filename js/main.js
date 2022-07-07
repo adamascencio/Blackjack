@@ -26,6 +26,7 @@ let betEl = document.getElementById('bet');
 let playBtns = document.getElementById('play-button-row');
 let betBtns = document.getElementById('bet-button-row');
 let scoreEl = document.getElementById('p-score');
+let dScoreEl = document.getElementById('d-score');
 let dealBtn = document.getElementById('d-button');
 let hitBtn = document.getElementById('h-button');
 let standBtn = document.getElementById('s-button');
@@ -58,14 +59,15 @@ function render() {
   bankRollEl.textContent = bankRoll;
   betEl.textContent = bet;
   scoreEl.textContent = pScore;
+  (gameStatus === false) ? dScoreEl.textContent = dScore : dScoreEl.textContent = 0;
   renderHands();
   renderButtons();
   renderWinner();
 }
 
 function renderHands() {
-  playerEl.innerHTML = pHand.map(cardObj => `<div class="card ${cardObj.face} large"></div>`).join('');
-  dealerEl.innerHTML = dHand.map(cardObj => `<div class="card ${cardObj.back && gameStatus ? 'back' : cardObj.face} large"></div>`).join('');
+  playerEl.innerHTML = pHand.map(cardObj => `<div style="flex-shrink:1" class="card ${cardObj.face} large"></div>`).join('');
+  dealerEl.innerHTML = dHand.map(cardObj => `<div style="flex-shrink:1" class="card ${cardObj.back && gameStatus ? 'back' : cardObj.face} large"></div>`).join('');
 }
 
 function renderButtons() {
@@ -91,8 +93,9 @@ function handleBetClick(evt) {
 }
 
 function handleDealClick() {
-  winner = null;
   gameStatus = true;
+  pScore = dScore = 0;
+  winner = null;
   deck = shuffleDeck();
   dHand = [];
   pHand = [];
@@ -207,7 +210,7 @@ function payWinner() {
   } else if (winner === 'p') {
     bankRoll += bet * 2;
   } 
-  bet = pScore = dScore = 0;
+  bet = 0;
   gameStatus = false;
   dHand.forEach(card => card.back = false);
 }

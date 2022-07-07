@@ -5,6 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackjack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lobster&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/card-deck-css/css/cardstarter.css">
   <link rel="stylesheet" href="css/main.css">
   <script defer src="js/main.js"></script>
@@ -19,17 +22,26 @@
       <div id="dealer">
         <h2>Dealer's Hand</h2>
         <div id="dealer-hand"></div>
+        <p class="align-labels">Dealer Score: <span id="d-score">0</span></p>
       </div>
       <div id="player">
         <h2>Player's Hand</h2>
         <div id="player-hand"></div>
+        <p class="align-labels">Player Score: <span id="p-score">0</span></p>
       </div>
     </div>
     <div class="heading-margin">
+      <div class="container-margin" id="game-play">
+        <div id="play-button-row">
+          <button id="d-button">Deal</button>
+          <button id="h-button">Hit</button>
+          <button id="s-button">Stand</button>
+        </div>
+      </div>
       <div id="totals-row">
-        <div class="flex">
-          <p><strong>Bank Roll:</strong> <span id="b-roll">$500</span></p>
-          <p><strong>Bet Amount:</strong> <span id="bet">$0</span></p>
+        <div class="bet-totals">
+          <p>Bank Roll: <span id="b-roll">$500</span></p>
+          <p>Bet Amount: <span id="bet">$0</span></p>
         </div>
         <div id="bet-button-row">
           <p>Click to add to bet amount:</p>
@@ -40,13 +52,6 @@
         </div>
       </div>
     </div>
-    <div class="container-margin" id="game-play">
-      <div id="play-button-row">
-        <button id="d-button">Deal</button>
-        <button id="h-button">Hit</button>
-        <button id="s-button">Stand</button>
-      </div>
-      <p>Player Score: <span id="p-score">0</span></p>
   </main>
   
 </body>
