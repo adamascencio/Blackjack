@@ -101,7 +101,7 @@ function handleDealClick() {
   dHand[1].back = true;
   dScore = getScore(dHand);
   pScore = getScore(pHand);
-  if (pScore === 21 || dScore === 21){
+  if (pScore === 21){
     getWinner();
     payWinner();
   };
@@ -154,7 +154,7 @@ function getWinner() {
   } else if (pScore === 21) {
     return winner = 'p';
   } else if (dScore === 21) {
-    return pHand.length === 2 ? winner = 'dbj' : winner = 'd';
+    return dHand.length === 2 ? winner = 'dbj' : winner = 'd';
   } else if (dScore > pScore) {
     return winner = 'd';
   } else if (pScore > dScore) {
@@ -178,7 +178,7 @@ function createDeck() {
     for (let num of VALUES) {
       deck.push({
         face: `${suit}${num}`,
-        value: Number(num) || (num === 'a' ? 0 : 10),
+        value: Number(num) || (num === 'A' ? 0 : 10),
         back: false
       });
     }
@@ -209,4 +209,5 @@ function payWinner() {
   } 
   bet = pScore = dScore = 0;
   gameStatus = false;
+  dHand.forEach(card => card.back = false);
 }
