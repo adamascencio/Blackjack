@@ -56,8 +56,8 @@ function init() {
 
 // Render the game state to the DOM
 function render() {
-  bankRollEl.textContent = bankRoll;
-  betEl.textContent = bet;
+  bankRollEl.textContent = `$${bankRoll}`;
+  betEl.textContent = `$${bet}`;
   scoreEl.textContent = pScore;
   (gameStatus === false) ? dScoreEl.textContent = dScore : dScoreEl.textContent = 0;
   renderHands();
@@ -86,7 +86,7 @@ function handleBetClick(evt) {
   if (btn.tagName !== 'BUTTON' ||  // make sure the button was clicked
       gameStatus === true          // only allow clicks while game is inactive
       ) return;
-  const betAmt = parseInt(btn.textContent.replace('$', ''));
+  const betAmt = parseInt(evt.target.textContent.substring(1));
   bet += betAmt;
   bankRoll -= betAmt;
   render();

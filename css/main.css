@@ -13,7 +13,7 @@ body {
 
 header {
   background-color: #35654d;
-  width: 100%;
+  width: 100vw;
   margin: 0;
   height: 10vh;
   display: flex;
@@ -86,7 +86,13 @@ button {
 }
 
 .btn {
-  width: 50px;
+  width: 60px;
+}
+
+.center {
+  margin: 0 auto 30px auto;
+  display: flex;
+  gap: 30px;
 }
 
 .container-margin {
@@ -95,20 +101,38 @@ button {
   text-align: center;
 }
 
+.flex-ctr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .heading-margin {
   margin-top: 35px;
 } 
+
+.margin {
+  margin: 0 auto;
+}
 
 .bet-totals, #bet-button-row {
   border: 3px solid white;
   border-radius: 10px;
   padding: 5px 10px;
   background-color: lightgray;
-  text-align: center;
+  text-align: left;
+  width: 80vw;
+  max-width: 300px;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bet-totals {
-  padding: 14px 40.1325px;
+  
 }
 
 #play-button-row {
@@ -116,21 +140,26 @@ button {
   margin: 0 auto;
 }
 
+#play-button-row > button {
+  width: 110px;
+  text-align: center;
+}
+
 #totals-row {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: center;
-  gap: 100px;
-}
-
-#bet-button-row {
-  /* margin-top: 20px; */
+  gap: 50px;
 }
 
 #bet-button-row > button {
   padding: 5px;
   margin: 10px 5px;
+}
+
+#bet-button-row > p {
+  text-align: center;
 }
 
 #h-button, #s-button {
@@ -142,6 +171,7 @@ button {
   border-radius: 10%;
   background-color: #35654d;
   height: 32vh;
+  max-height: 500px;
   width: 25vw;
   max-width: 500px;
   margin-top: 20px;
@@ -170,6 +200,12 @@ button {
   font-size: 1.5rem;
 }
 
+#bank-roll, .bet-totals > p:last-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
 /* Media Queries */
 
 @media screen and (max-width: 1200px) {
@@ -189,7 +225,23 @@ button {
 @media screen and (max-width: 700px) {
   #dealer-hand,
   #player-hand {
-    height: 30vh;
+    height: 20vh;
     width: 35vw;
+  }
+
+  #play-button-row {
+    display: flex;
+    flex-direction: row;
+    gap: 5vw;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #totals-row {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transform: scale(.9);
   }
 }
