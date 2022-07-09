@@ -122,7 +122,7 @@ function handleHitClick() {
 }
 
 function handleDealerHit() {
-  if (dScore <= 16) {
+  while (dScore <= 17) {
     dHand.push(deck.pop());
     dScore = getScore(dHand);
   }
