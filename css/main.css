@@ -69,7 +69,7 @@ button {
 }
 
 .bet-totals > p {
-  margin: auto;
+  margin: auto 15% auto auto;
   padding: 3px;
   font-size: 1.5rem;
 }
