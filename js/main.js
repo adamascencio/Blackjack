@@ -21,6 +21,7 @@ let winner; // player (p), player blackjack (pbj), dealer (d), dealer blackjack 
 let gameStatus; // true if game is active, false if game is inactive
 
 /*----- cached element references -----*/
+let bankRollBtn = document.getElementById('add-to-bank-roll');
 let bankRollEl = document.getElementById('b-roll');
 let betEl = document.getElementById('bet');
 let playBtns = document.getElementById('play-button-row');

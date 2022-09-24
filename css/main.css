@@ -26,6 +26,11 @@ h1, h2, #dealer > p, #player > p {
   font-size: 1.8rem;
 }
 
+form > h2 {
+  color: black;
+  margin: 0;
+}
+
 #dealer > h2, #player > h2 {
   color: rgb(242, 11, 11);
   font-size: 2rem;
@@ -114,6 +119,32 @@ button {
 
 .margin {
   margin: 0 auto;
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+#add-to-bank-roll {
+  position: absolute;
+  right: 5%;
+}
+
+#buy-chips-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  justify-items: end;
+  position: absolute;
+  background-color: lightgray;
+  padding: 40px;
+  border: 3px solid black;
+  border-radius: 10px;
+  width: 50%;
+}
+
+#buy-chips {
+  justify-self: stretch;
 }
 
 .bet-totals, #bet-button-row {
