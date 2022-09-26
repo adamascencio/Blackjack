@@ -21,8 +21,9 @@ let winner; // player (p), player blackjack (pbj), dealer (d), dealer blackjack 
 let gameStatus; // true if game is active, false if game is inactive
 
 /*----- cached element references -----*/
-let bankRollBtn = document.getElementById('add-to-bank-roll');
+let bankRollContainer = document.getElementById('buy-chips-container');
 let bankRollEl = document.getElementById('b-roll');
+let bankRollInput = document.getElementById('buy-chips');
 let betEl = document.getElementById('bet');
 let playBtns = document.getElementById('play-button-row');
 let betBtns = document.getElementById('bet-button-row');
@@ -35,6 +36,8 @@ let playerEl = document.getElementById('player-hand');
 let dealerEl = document.getElementById('dealer-hand');
 
 /*----- event listeners -----*/
+document.getElementById('add-to-bank-roll').addEventListener('click', handleBuyChipsClick);
+bankRollContainer.addEventListener('click', handleBankRollClick);
 document.getElementById('bet-button-row').addEventListener('click', handleBetClick);
 dealBtn.addEventListener('click', handleDealClick);
 hitBtn.addEventListener('click', handleHitClick);
@@ -81,8 +84,29 @@ function renderWinner() {
   document.querySelector('h2').textContent = DISPLAY_WINNER[winner];
 }
 
+function handleBuyChipsClick() {
+  bankRollContainer.classList.toggle('hidden');
+}
+
+function handleBankRollClick(evt) {
+  const btn = evt.target.id; 
+  // guards
+  if (gameStatus === true) return;
+  if (btn === 'buy-btn') {
+    if (parseInt(bankRollInput.value) > 0) {
+      bankRoll += parseInt(bankRollInput.value);
+      bankRollInput.value = '';
+      render();
+      bankRollContainer.classList.toggle('hidden');
+    }
+  } else if (btn === 'cancel-btn') {
+    bankRollContainer.classList.toggle('hidden');
+  }
+}
+
 function handleBetClick(evt) {
   const btn = evt.target;
+  console.log(btn)
   // guards
   if (btn.tagName !== 'BUTTON' ||  // make sure the button was clicked
       gameStatus === true          // only allow clicks while game is inactive

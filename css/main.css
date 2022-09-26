@@ -26,7 +26,7 @@ h1, h2, #dealer > p, #player > p {
   font-size: 1.8rem;
 }
 
-form > h2 {
+div > h2 {
   color: black;
   margin: 0;
 }
@@ -125,9 +125,29 @@ button {
   grid-column: span 2;
 }
 
+.hidden {
+  position: static !important;
+  display: none !important;
+}
+
+.justify-start {
+  justify-self: start;
+}
+
 #add-to-bank-roll {
   position: absolute;
   right: 5%;
+}
+
+#buy-chips-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100vw;
+  height: 150vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
 }
 
 #buy-chips-form {
@@ -141,6 +161,7 @@ button {
   border: 3px solid black;
   border-radius: 10px;
   width: 50%;
+  max-width: 400px;
 }
 
 #buy-chips {
