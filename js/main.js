@@ -77,7 +77,7 @@ function renderHands() {
 function renderButtons() {
   dealBtn.style.display = (!gameStatus && bet > 0) ? 'inline' : 'none';
   hitBtn.style.display = standBtn.style.display = gameStatus ? 'inline' : 'none';
-  betBtns.style.visibility = gameStatus ? 'hidden': 'visible';
+  betBtns.style.display = gameStatus ? 'none': '';
   playBtns.style.margin = bet > 0 ? '0 auto 30px auto' : '0';
 }
 
