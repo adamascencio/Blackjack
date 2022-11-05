@@ -38,7 +38,7 @@ let dealerEl = document.getElementById('dealer-hand');
 /*----- event listeners -----*/
 document.getElementById('add-to-bank-roll').addEventListener('click', handleBuyChipsClick);
 bankRollContainer.addEventListener('click', handleBankRollClick);
-document.getElementById('bet-button-row').addEventListener('click', handleBetClick);
+betBtns.addEventListener('click', handleBetClick);
 dealBtn.addEventListener('click', handleDealClick);
 hitBtn.addEventListener('click', handleHitClick);
 standBtn.addEventListener('click', handleStandClick);
@@ -78,6 +78,7 @@ function renderButtons() {
   dealBtn.style.display = (!gameStatus && bet > 0) ? 'inline' : 'none';
   hitBtn.style.display = standBtn.style.display = gameStatus ? 'inline' : 'none';
   betBtns.style.visibility = gameStatus ? 'hidden': 'visible';
+  playBtns.style.margin = bet > 0 ? '0 auto 30px auto' : '0';
 }
 
 function renderWinner() {
@@ -106,7 +107,6 @@ function handleBankRollClick(evt) {
 
 function handleBetClick(evt) {
   const btn = evt.target;
-  console.log(btn)
   // guards
   if (btn.tagName !== 'BUTTON' ||  // make sure the button was clicked
       gameStatus === true          // only allow clicks while game is inactive

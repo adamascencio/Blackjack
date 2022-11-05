@@ -69,6 +69,12 @@ button {
   font-size: 1.1rem;
 }
 
+.flex-row > button {
+  width: clamp(100px, 33%, 300px);
+  font-size: clamp(1rem, 1.5vw, 2rem);
+  min-width: 70px;
+}
+
 #totals-row > p {
   margin-top: 20px;
 }
@@ -95,7 +101,6 @@ button {
 }
 
 .center {
-  margin: 0 auto 30px auto;
   display: flex;
   gap: 30px;
 }
@@ -111,6 +116,20 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .heading-margin {
@@ -130,13 +149,14 @@ button {
   display: none !important;
 }
 
-.justify-start {
-  justify-self: start;
-}
-
 #add-to-bank-roll {
   position: absolute;
   right: 5%;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  width: clamp(100px, 20vw, 200px);
+  padding: 10px;
+  border: 1px solid white;
+  color: gold;
 }
 
 #buy-chips-container {
@@ -151,21 +171,26 @@ button {
 }
 
 #buy-chips-form {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
   gap: 30px;
-  justify-items: end;
   position: absolute;
   background-color: lightgray;
   padding: 40px;
-  border: 3px solid black;
+  border: 3px solid white;
   border-radius: 10px;
   width: 50%;
   max-width: 400px;
 }
 
-#buy-chips {
-  justify-self: stretch;
+#buy-chips-form > input {
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  text-align: center;
 }
 
 .bet-totals, #bet-button-row {
@@ -278,6 +303,10 @@ button {
 
   header > h1 {
     margin-left: 5%;
+  }
+
+  #buy-chips-form {
+    width: 80%;
   }
 
   #dealer-hand,
