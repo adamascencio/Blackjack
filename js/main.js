@@ -70,8 +70,18 @@ function render() {
 }
 
 function renderHands() {
-  playerEl.innerHTML = pHand.map(cardObj => `<div style="flex-shrink:1" class="card ${cardObj.face} large"></div>`).join('');
-  dealerEl.innerHTML = dHand.map(cardObj => `<div style="flex-shrink:1" class="card ${cardObj.back && gameStatus ? 'back' : cardObj.face} large"></div>`).join('');
+  // render a card in 2 second increments
+  pHand.map((cardObj, idx) => {
+    setTimeout(() => {
+      playerEl.innerHTML += `<div style="flex-shrink:1" class="card ${cardObj.face} large"></div>`;
+    }, 2000 * idx);
+  });
+
+  dHand.map((cardObj, idx) => {
+    setTimeout(() => {
+      dealerEl.innerHTML += `<div style="flex-shrink:1" class="card ${cardObj.back && gameStatus ? 'back' : cardObj.face} large"></div>`;
+    }, 1000 * idx);
+  });
 }
 
 function renderButtons() {
