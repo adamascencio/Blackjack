@@ -74,7 +74,7 @@ function renderHands() {
   pHand.map((cardObj, idx) => {
     setTimeout(() => {
       playerEl.innerHTML += `<div style="flex-shrink:1" class="card ${cardObj.face} large"></div>`;
-    }, 2000 * idx);
+    }, 1000 * idx);
   });
 
   dHand.map((cardObj, idx) => {
