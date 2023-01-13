@@ -27,13 +27,13 @@ let bankRollInput = document.getElementById('buy-chips');
 let betEl = document.getElementById('bet');
 let playBtns = document.getElementById('play-button-row');
 let betBtns = document.getElementById('bet-button-row');
-let scoreEl = document.getElementById('p-score');
+let pScoreEl = document.getElementById('p-score');
 let dScoreEl = document.getElementById('d-score');
 let dealBtn = document.getElementById('d-button');
 let hitBtn = document.getElementById('h-button');
 let standBtn = document.getElementById('s-button');
-let playerEl = document.getElementById('player-hand');
-let dealerEl = document.getElementById('dealer-hand');
+let playerHandEl = document.getElementById('player-hand');
+let dealerHandEl = document.getElementById('dealer-hand');
 
 /*----- event listeners -----*/
 document.getElementById('add-to-bank-roll').addEventListener('click', handleBuyChipsClick);
@@ -62,7 +62,7 @@ function init() {
 function render() {
   bankRollEl.textContent = `$${bankRoll}`;
   betEl.textContent = `$${bet}`;
-  scoreEl.textContent = pScore;
+  pScoreEl.textContent = pScore;
   (gameStatus === false) ? dScoreEl.textContent = dScore : dScoreEl.textContent = 0;
   renderHands();
   renderButtons();
@@ -70,18 +70,9 @@ function render() {
 }
 
 function renderHands() {
-  // render a card in 2 second increments
-  pHand.map((cardObj, idx) => {
-    setTimeout(() => {
-      playerEl.innerHTML += `<div style="flex-shrink:1" class="card ${cardObj.face} large"></div>`;
-    }, 1000 * idx);
-  });
+  playerHandEl.innerHTML = pHand.map(cardObj => `<div style="flex-shrink:1" class="card ${cardObj.face} large"></div>`).join('');
 
-  dHand.map((cardObj, idx) => {
-    setTimeout(() => {
-      dealerEl.innerHTML += `<div style="flex-shrink:1" class="card ${cardObj.back && gameStatus ? 'back' : cardObj.face} large"></div>`;
-    }, 1000 * idx);
-  });
+  dealerHandEl.innerHTML = dHand.map(cardObj => `<div style="flex-shrink:1" class="card ${cardObj.back && gameStatus ? 'back' : cardObj.face} large"></div>`).join('');
 }
 
 function renderButtons() {
