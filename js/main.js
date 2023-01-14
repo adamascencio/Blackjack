@@ -109,7 +109,8 @@ function handleBetClick(evt) {
   const btn = evt.target;
   // guards
   if (btn.tagName !== 'BUTTON' ||  // make sure the button was clicked
-      gameStatus === true          // only allow clicks while game is inactive
+      gameStatus === true ||       // only allow clicks while game is inactive
+      bankRoll === 0               // prevent user from betting more than bankroll
       ) return;
   const betAmt = parseInt(evt.target.textContent.substring(1));
   bet += betAmt;
