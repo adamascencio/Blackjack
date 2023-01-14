@@ -27,7 +27,6 @@ header {
 
 h1, h2, #dealer > p, #player > p {
   color: gold;
-  font-size: 1.8rem;
 }
 
 div > h2 {
@@ -37,18 +36,21 @@ div > h2 {
 
 #dealer > h2, #player > h2 {
   color: rgb(242, 11, 11);
-  font-size: 2rem;
 }
 
 h1 {
   margin: 0;
-  font-size: 3rem;
+  font-size: clamp(2rem, 10vw, 3rem);
   font-family: 'Lobster', cursive;
 }
 
 h2 {
-  margin-top: 25px;
+  margin-top: 15px;
   text-align: center;
+}
+
+h2, #dealer > p, #player > p {
+  font-size: clamp(1.4rem, 3vw, 2rem);
 }
 
 span {
@@ -321,7 +323,7 @@ button {
 
   #dealer-hand,
   #player-hand {
-    height: 20vh;
+    height: 30vh;
     width: 35vw;
   }
 
