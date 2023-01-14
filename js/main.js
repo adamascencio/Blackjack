@@ -147,6 +147,7 @@ function handleHitClick() {
 }
 
 function handleStandClick() {
+  hitBtn.setAttribute('disabled', true);
   handleDealerHit();
 }
 
@@ -242,4 +243,5 @@ function payWinner() {
   bet = 0;
   gameStatus = false;
   dHand.forEach(card => card.back = false);
+  hitBtn.removeAttribute('disabled');
 }
