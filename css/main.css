@@ -8,8 +8,11 @@ body {
   margin: 0;
   background-image: url("https://i.imgur.com/XfDiBCZ.jpg");
   background-size: cover;
-  background-color: #35654d;
   font-family: 'Abril Fatface', cursive;
+}
+
+html {
+  background-color: #35654d;
 }
 
 header {
