@@ -211,11 +211,17 @@ button {
 #play-button-row {
   width: 100%;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
 }
 
 #play-button-row > button {
-  width: 110px;
-  text-align: center;
+  width: 100px;
+}
+
+#play-button-row > button:hover {
+  transform: scale(1.1);
 }
 
 #totals-row {
