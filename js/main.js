@@ -146,7 +146,11 @@ function handleHitClick() {
   render();
 }
 
-function handleDealerHit(cb) {
+function handleStandClick() {
+  handleDealerHit();
+}
+
+function handleDealerHit() {
   renderHands();
   setTimeout(function() {
     if (dScore < 17) {
@@ -154,15 +158,11 @@ function handleDealerHit(cb) {
       dScore = getScore(dHand);
       handleDealerHit();
     } else {
-      cb();
+      getWinner();
+      payWinner();
+      render();
     }
   }, 2000);
-}
-
-function handleStandClick() {
-  handleDealerHit(getWinner());
-  payWinner();
-  render();
 }
 
 function getWinner() {
