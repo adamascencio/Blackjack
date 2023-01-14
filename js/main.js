@@ -62,16 +62,15 @@ function init() {
 function render() {
   bankRollEl.textContent = `$${bankRoll}`;
   betEl.textContent = `$${bet}`;
-  pScoreEl.textContent = pScore;
-  (gameStatus === false) ? dScoreEl.textContent = dScore : dScoreEl.textContent = 0;
   renderHands();
   renderButtons();
   renderWinner();
 }
 
 function renderHands() {
+  pScoreEl.textContent = pScore;
+  (gameStatus === false) ? dScoreEl.textContent = dScore : dScoreEl.textContent = '??';
   playerHandEl.innerHTML = pHand.map(cardObj => `<div style="flex-shrink:1" class="card ${cardObj.face} large"></div>`).join('');
-
   dealerHandEl.innerHTML = dHand.map(cardObj => `<div style="flex-shrink:1" class="card ${cardObj.back && gameStatus ? 'back' : cardObj.face} large"></div>`).join('');
 }
 
@@ -130,7 +129,7 @@ function handleDealClick() {
   dHand[1].back = true;
   dScore = getScore(dHand);
   pScore = getScore(pHand);
-  if (pScore === 21){
+  if (pScore === 21) {
     getWinner();
     payWinner();
   };
@@ -147,17 +146,21 @@ function handleHitClick() {
   render();
 }
 
-function handleDealerHit() {
-  while (dScore <= 17) {
-    dHand.push(deck.pop());
-    dScore = getScore(dHand);
-  }
-  render();
+function handleDealerHit(cb) {
+  renderHands();
+  setTimeout(function() {
+    if (dScore < 17) {
+      dHand.push(deck.pop());
+      dScore = getScore(dHand);
+      handleDealerHit();
+    } else {
+      cb();
+    }
+  }, 2000);
 }
 
 function handleStandClick() {
-  handleDealerHit();
-  getWinner();
+  handleDealerHit(getWinner());
   payWinner();
   render();
 }
@@ -193,12 +196,12 @@ function getWinner() {
 
 function shuffleDeck() {
   const deck = ORIGINAL_DECK.slice(); // copy the original deck
-  const tempDeck = [];
+  const shuffledDeck = [];
   while (deck.length > 0) {
     const randIdx = Math.floor(Math.random() * deck.length);
-    tempDeck.push(deck.splice(randIdx, 1)[0]); 
+    shuffledDeck.push(deck.splice(randIdx, 1)[0]); 
   }
-  return tempDeck;
+  return shuffledDeck;
 }
 
 function createDeck() {
